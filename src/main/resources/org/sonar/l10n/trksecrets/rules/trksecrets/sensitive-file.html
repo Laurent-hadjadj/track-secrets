@@ -1,0 +1,13 @@
+<p>Key stores, certificates, <code>.env</code> files, <code>.netrc</code>, shell histories or password files should not be versioned.</p>
+<h2>Why is this an issue?</h2>
+<p>Credentials must never appear in clear text in source code: use a credentials store (such as Vault or credstash) and refer to secrets by identifier.</p>
+<h2>Noncompliant code example</h2>
+<pre>config/prod.env</pre>
+<h2>Compliant solution</h2>
+<pre>Add the file to .gitignore and provide a template.</pre>
+<h2>Notes</h2>
+<p>Inactive by default. Based on the file name only.</p>
+<h2>See</h2>
+<ul>
+  <li><a href="https://cwe.mitre.org/data/definitions/538.html">CWE-538</a></li>
+</ul>

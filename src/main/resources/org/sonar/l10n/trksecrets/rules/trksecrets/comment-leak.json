@@ -1,0 +1,17 @@
+{
+  "title": "Comments may leak sensitive information",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant/Issue",
+    "constantCost": "30min"
+  },
+  "tags": [
+    "secrets",
+    "track-secrets",
+    "ma-moulinette"
+  ],
+  "defaultSeverity": "Minor",
+  "scope": "All",
+  "quickfix": "unknown"
+}

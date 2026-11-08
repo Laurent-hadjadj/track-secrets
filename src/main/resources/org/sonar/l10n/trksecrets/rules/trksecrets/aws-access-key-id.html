@@ -1,0 +1,13 @@
+<p>An AWS Access Key ID, together with its secret key, grants access to AWS resources.</p>
+<h2>Why is this an issue?</h2>
+<p>Credentials must never appear in clear text in source code: use a credentials store (such as Vault or credstash) and refer to secrets by identifier.</p>
+<h2>Noncompliant code example</h2>
+<pre>aws_access_key_id = AKIAIOSFODNN7EXAMPLE</pre>
+<h2>Compliant solution</h2>
+<pre>Use an IAM role or AWS_ACCESS_KEY_ID from the environment.</pre>
+<h2>Notes</h2>
+<p>Inactive by default: sonar-text already covers AWS credentials in SonarQube. Activate it only if sonar-text is not installed.</p>
+<h2>See</h2>
+<ul>
+  <li><a href="https://cwe.mitre.org/data/definitions/798.html">CWE-798</a></li>
+</ul>

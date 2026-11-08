@@ -1,0 +1,13 @@
+<p>A temporary AWS session token is a credential and must not be stored in source code.</p>
+<h2>Why is this an issue?</h2>
+<p>Credentials must never appear in clear text in source code: use a credentials store (such as Vault or credstash) and refer to secrets by identifier.</p>
+<h2>Noncompliant code example</h2>
+<pre>AWS_SESSION_TOKEN = "IQoJb3JpZ2luX2Vj..."</pre>
+<h2>Compliant solution</h2>
+<pre>Obtain the token at runtime (STS, IAM role).</pre>
+<h2>Notes</h2>
+<p>Inactive by default: sonar-text already covers AWS credentials in SonarQube.</p>
+<h2>See</h2>
+<ul>
+  <li><a href="https://cwe.mitre.org/data/definitions/798.html">CWE-798</a></li>
+</ul>

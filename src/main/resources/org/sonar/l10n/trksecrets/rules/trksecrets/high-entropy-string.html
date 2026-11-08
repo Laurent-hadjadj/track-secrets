@@ -1,0 +1,13 @@
+<p>A long string mixing letters and digits with a high Shannon entropy looks like randomly generated cryptographic material.</p>
+<h2>Why is this an issue?</h2>
+<p>Credentials must never appear in clear text in source code: use a credentials store (such as Vault or credstash) and refer to secrets by identifier.</p>
+<h2>Noncompliant code example</h2>
+<pre>seed = "x9Fq2LmZ7vB1nTa8KcR4wYd6"</pre>
+<h2>Compliant solution</h2>
+<pre>seed = ${SEED}</pre>
+<h2>Notes</h2>
+<p>The threshold (default 4.5 bits per character) is set with <code>track.secrets.entropy.threshold</code>. Review the results manually: hashes and identifiers may be reported.</p>
+<h2>See</h2>
+<ul>
+  <li><a href="https://cwe.mitre.org/data/definitions/798.html">CWE-798</a></li>
+</ul>

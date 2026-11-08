@@ -1,0 +1,11 @@
+<p><code>eval</code>, <code>exec</code>, <code>system</code> et les appels similaires peuvent conduire à l'exécution de code à distance lorsqu'ils reçoivent des données non fiables.</p>
+<h2>Exemple de code non conforme</h2>
+<pre>os.system(command)</pre>
+<h2>Solution conforme</h2>
+<pre>Utilisez une API sûre avec une liste d'arguments explicite.</pre>
+<h2>Remarques</h2>
+<p>Inactive par défaut. Python uniquement.</p>
+<h2>Voir</h2>
+<ul>
+  <li><a href="https://cwe.mitre.org/data/definitions/95.html">CWE-95</a></li>
+</ul>

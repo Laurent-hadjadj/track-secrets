@@ -1,0 +1,27 @@
+{
+  "title": "API keys and tokens should not be hard-coded",
+  "type": "VULNERABILITY",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant/Issue",
+    "constantCost": "30min"
+  },
+  "tags": [
+    "secrets",
+    "track-secrets",
+    "ma-moulinette",
+    "cwe",
+    "security"
+  ],
+  "defaultSeverity": "Critical",
+  "scope": "All",
+  "quickfix": "unknown",
+  "securityStandards": {
+    "CWE": [
+      798
+    ],
+    "OWASP": [
+      "A2"
+    ]
+  }
+}

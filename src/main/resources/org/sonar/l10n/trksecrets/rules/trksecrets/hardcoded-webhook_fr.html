@@ -1,0 +1,11 @@
+<p>Les URL de webhook de Slack, Hubspot et Twilio contiennent un chemin secret : toute personne qui le connaît peut publier des messages.</p>
+<h2>Pourquoi est-ce un problème ?</h2>
+<p>Un identifiant ne doit jamais apparaître en clair dans le code source : utilisez un coffre de secrets (comme Vault ou credstash) et référencez les secrets par leur identifiant.</p>
+<h2>Exemple de code non conforme</h2>
+<pre>https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX</pre>
+<h2>Solution conforme</h2>
+<pre>Lisez l'URL depuis un coffre de secrets.</pre>
+<h2>Voir</h2>
+<ul>
+  <li><a href="https://cwe.mitre.org/data/definitions/798.html">CWE-798</a></li>
+</ul>

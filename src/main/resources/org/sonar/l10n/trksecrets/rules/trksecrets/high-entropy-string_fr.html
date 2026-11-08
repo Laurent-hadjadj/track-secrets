@@ -1,0 +1,13 @@
+<p>Une longue chaîne mêlant lettres et chiffres, avec une entropie de Shannon élevée, ressemble à un élément cryptographique généré aléatoirement.</p>
+<h2>Pourquoi est-ce un problème ?</h2>
+<p>Un identifiant ne doit jamais apparaître en clair dans le code source : utilisez un coffre de secrets (comme Vault ou credstash) et référencez les secrets par leur identifiant.</p>
+<h2>Exemple de code non conforme</h2>
+<pre>seed = "x9Fq2LmZ7vB1nTa8KcR4wYd6"</pre>
+<h2>Solution conforme</h2>
+<pre>seed = ${SEED}</pre>
+<h2>Remarques</h2>
+<p>Le seuil (4,5 bits par caractère par défaut) se règle avec <code>track.secrets.entropy.threshold</code>. Vérifiez les résultats manuellement : des empreintes (hash) et des identifiants peuvent être signalés.</p>
+<h2>Voir</h2>
+<ul>
+  <li><a href="https://cwe.mitre.org/data/definitions/798.html">CWE-798</a></li>
+</ul>

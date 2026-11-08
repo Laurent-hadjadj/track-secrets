@@ -1,0 +1,13 @@
+<p>Les clés d'API et les jetons d'accès donnent accès à un service au nom de leur propriétaire. Une fois versionnés, ils doivent être considérés comme compromis.</p>
+<h2>Pourquoi est-ce un problème ?</h2>
+<p>Un identifiant ne doit jamais apparaître en clair dans le code source : utilisez un coffre de secrets (comme Vault ou credstash) et référencez les secrets par leur identifiant.</p>
+<h2>Exemple de code non conforme</h2>
+<pre>api_key: "k8Jd92LmQp0xZvB3nTa7"</pre>
+<h2>Solution conforme</h2>
+<pre>api_key: ${API_KEY}</pre>
+<h2>Remarques</h2>
+<p>Détectée à partir des noms de clé se terminant par <em>key</em> ou <em>token</em>, avec une valeur d'au moins 16 caractères sans espace qui ne ressemble pas au nom de la clé.</p>
+<h2>Voir</h2>
+<ul>
+  <li><a href="https://cwe.mitre.org/data/definitions/798.html">CWE-798</a></li>
+</ul>

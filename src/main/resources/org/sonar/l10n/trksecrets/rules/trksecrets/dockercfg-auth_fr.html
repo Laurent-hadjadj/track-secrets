@@ -1,0 +1,11 @@
+<p>Le champ <code>auth</code> d'un fichier <code>.dockercfg</code> ou <code>config.json</code> est l'encodage base64 de <em>utilisateur:mot de passe</em>.</p>
+<h2>Pourquoi est-ce un problème ?</h2>
+<p>Un identifiant ne doit jamais apparaître en clair dans le code source : utilisez un coffre de secrets (comme Vault ou credstash) et référencez les secrets par leur identifiant.</p>
+<h2>Exemple de code non conforme</h2>
+<pre>{"auths": {"registry.example": {"auth": "dXNlcjpwYXNz"}}}</pre>
+<h2>Solution conforme</h2>
+<pre>Utilisez un assistant d'identifiants (credential helper) ou un secret de l'intégration continue.</pre>
+<h2>Voir</h2>
+<ul>
+  <li><a href="https://cwe.mitre.org/data/definitions/798.html">CWE-798</a></li>
+</ul>

@@ -1,0 +1,16 @@
+target/
+dependency-reduced-pom.xml
+.idea/
+*.iml
+.vscode/
+.claude/
+
+# Ne jamais versionner de secrets ou de sauvegardes de secrets
+token*
+*.bak
+*.token
+.env
+.env.*
+*.pem
+*.key
+*.jks

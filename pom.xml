@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2026 Laurent HADJADJ
+  SPDX-License-Identifier: LGPL-3.0-or-later
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>fr.ma.moulinette</groupId>
+  <artifactId>track-secrets</artifactId>
+  <version>1.0.0-RELEASE</version>
+  <packaging>sonar-plugin</packaging>
+
+  <name>SonarQube :: TSE :: Track Secrets</name>
+  <description>
+    Détection multi-langage des secrets en dur (mots de passe, clés d'API, identifiants AWS, jetons,
+    clés privées...)
+  </description>
+  <inceptionYear>2026</inceptionYear>
+
+  <licenses>
+    <license>
+      <name>GNU Lesser General Public License v3.0 or later</name>
+      <url>https://www.gnu.org/licenses/lgpl-3.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <contributors>
+    <contributor>
+      <name>Laurent HADJADJ</name>
+      <organizationUrl>https://github.com/laurent-hadjadj</organizationUrl>
+    </contributor>
+  </contributors>
+
+  <scm>
+    <connection>scm:git:https://github.com/laurent-hadjadj/track-secrets.git</connection>
+    <developerConnection>scm:git:git@github.com:laurent-hadjadj/track-secrets.git</developerConnection>
+    <url>https://github.com/laurent-hadjadj/track-secrets</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <properties>
+    <!-- Version de l'API plugin utilisée pour la compilation (artefact disponible dans le dépôt local) -->
+    <sonar.plugin.api.version>9.17.0.587</sonar.plugin.api.version>
+    <!-- Plancher de compatibilité garanti dans le manifeste : SonarQube 10.7 LTS -->
+    <sonar.plugin.api.minVersion>10.7.0.96327</sonar.plugin.api.minVersion>
+    <jacoco.version>0.8.12</jacoco.version>
+    <!-- Rapport de couverture lu par « mvn sonar:sonar » (généré par « mvn verify ») -->
+    <sonar.coverage.jacoco.xmlReportPaths>target/jacoco-xml/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+    <!--
+      Exclusion ciblée de la règle S2698 (message dans les assertions) sur les tests uniquement.
+      La règle reste active dans le profil qualité, pour le code de production et les autres projets : elle est
+      légitime pour les assertions JUnit nues (assertTrue(x)), où un échec ne dit rien. Les tests de ce projet
+      utilisent AssertJ, dont l'échec décrit déjà la valeur attendue et la valeur observée ; exiger un
+      message sur chacune des 123 assertions répéterait le nom des tests. Voir docs/QUALITE.md.
+    -->
+    <sonar.issue.ignore.multicriteria>e1,e2,e3,e4</sonar.issue.ignore.multicriteria>
+    <sonar.issue.ignore.multicriteria.e1.ruleKey>java:S2698</sonar.issue.ignore.multicriteria.e1.ruleKey>
+    <sonar.issue.ignore.multicriteria.e1.resourceKey>src/test/**/*</sonar.issue.ignore.multicriteria.e1.resourceKey>
+    <!--
+      Exclusion ciblée de fb-contrib PSC_PRESIZE_COLLECTIONS (collection non dimensionnée) sur ce projet.
+      La règle reste active dans le profil : elle est utile quand la taille est connue et que la collection est
+      grande ou remplie dans un chemin chaud. Ici les collections contiennent quelques règles ou les lignes d'un
+      fichier, sans gain mesurable. Voir docs/QUALITE.md.
+    -->
+    <sonar.issue.ignore.multicriteria.e2.ruleKey>
+      fb-contrib:PSC_PRESIZE_COLLECTIONS
+    </sonar.issue.ignore.multicriteria.e2.ruleKey>
+    <sonar.issue.ignore.multicriteria.e2.resourceKey>**/*</sonar.issue.ignore.multicriteria.e2.resourceKey>
+    <!--
+      Exclusion ciblée de fb-contrib NAB_NEEDLESS_BOOLEAN_CONSTANT_CONVERSION sur XmlExtractor uniquement.
+      Les trois appels setProperty(..., false) qui désactivent les DTD et les entités externes (protection XXE)
+      doivent garder le littéral false dans la méthode : c'est ce que vérifie FindSecBugs. Écrire
+      Boolean.FALSE pour éviter le boxage masquerait la protection à cet outil de sécurité, pour un gain nul
+      (Boolean.valueOf(false) retourne une constante). La sécurité prime. Voir docs/QUALITE.md.
+    -->
+    <sonar.issue.ignore.multicriteria.e3.ruleKey>
+      fb-contrib:NAB_NEEDLESS_BOOLEAN_CONSTANT_CONVERSION
+    </sonar.issue.ignore.multicriteria.e3.ruleKey>
+    <sonar.issue.ignore.multicriteria.e3.resourceKey>
+      **/extract/XmlExtractor.java
+    </sonar.issue.ignore.multicriteria.e3.resourceKey>
+    <!--
+      Exclusion ciblée de Creedengo GCI82 (variable locale à déclarer final) sur ce projet.
+      La règle est exacte mais sans effet mesurable : le compilateur traite déjà les variables effectivement finales
+      comme telles, et le projet déclare ses variables avec var. Elle plante en outre sur les constructeurs compacts de
+      record. Une seule déclaration remplace plusieurs centaines de @SuppressWarnings, eux-mêmes sanctionnés par S1309.
+      Voir docs/QUALITE.md.
+    -->
+    <sonar.issue.ignore.multicriteria.e4.ruleKey>
+      creedengo-java:GCI82
+    </sonar.issue.ignore.multicriteria.e4.ruleKey>
+    <sonar.issue.ignore.multicriteria.e4.resourceKey>**/*</sonar.issue.ignore.multicriteria.e4.resourceKey>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.release>17</maven.compiler.release>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.sonarsource.api.plugin</groupId>
+      <artifactId>sonar-plugin-api</artifactId>
+      <version>${sonar.plugin.api.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.30</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Chargeur de métadonnées de règles (json/html) -->
+    <dependency>
+      <groupId>org.sonarsource.analyzer-commons</groupId>
+      <artifactId>sonar-analyzer-commons</artifactId>
+      <version>2.11.0.2861</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.7.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.23.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>5.12.0</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <!-- Les textes de licence sont embarqués dans le jar (META-INF), comme l'exigent la LGPL et l'Apache 2.0 -->
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>${project.basedir}</directory>
+        <targetPath>META-INF</targetPath>
+        <includes>
+          <include>LICENSE</include>
+          <include>NOTICE</include>
+          <include>LICENSING.md</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>${project.basedir}/LICENSES</directory>
+        <targetPath>META-INF/LICENSES</targetPath>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
+        <artifactId>sonar-packaging-maven-plugin</artifactId>
+        <version>1.23.0.740</version>
+        <extensions>true</extensions>
+        <configuration>
+          <pluginKey>track-secrets</pluginKey>
+          <pluginName>Track Secrets</pluginName>
+          <pluginDescription>Detection multi-langage des secrets en dur</pluginDescription>
+          <pluginClass>fr.ma.moulinette.secrets.TrackSecretsPlugin</pluginClass>
+          <sonarLintSupported>false</sonarLintSupported>
+          <skipDependenciesPackaging>true</skipDependenciesPackaging>
+          <pluginApiMinVersion>${sonar.plugin.api.minVersion}</pluginApiMinVersion>
+          <jreMinVersion>17</jreMinVersion>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.6.0</version>
+        <configuration>
+          <filters>
+            <filter>
+              <artifact>org.sonarsource.analyzer-commons:sonar-analyzer-commons</artifact>
+              <excludes>
+                <exclude>META-INF/MANIFEST.MF</exclude>
+              </excludes>
+            </filter>
+          </filters>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.9.0</version>
+        <configuration>
+          <release>17</release>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.6.0-M1</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.version}</version>
+        <executions>
+          <execution>
+            <id>prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <destFile>target/jacoco.exec</destFile>
+          <outputDirectory>target/jacoco-xml</outputDirectory>
+          <outputEncoding>UTF-8</outputEncoding>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

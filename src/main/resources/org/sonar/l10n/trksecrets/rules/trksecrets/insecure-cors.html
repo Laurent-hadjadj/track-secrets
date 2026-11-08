@@ -1,0 +1,11 @@
+<p>Allowing all origins, headers or credentials lets any web site call the API on behalf of a user.</p>
+<h2>Noncompliant code example</h2>
+<pre>ResourceOptions(allow_credentials=True, allow_headers="*")</pre>
+<h2>Compliant solution</h2>
+<pre>List the origins and headers explicitly.</pre>
+<h2>Notes</h2>
+<p>Inactive by default. Python only.</p>
+<h2>See</h2>
+<ul>
+  <li><a href="https://cwe.mitre.org/data/definitions/942.html">CWE-942</a></li>
+</ul>

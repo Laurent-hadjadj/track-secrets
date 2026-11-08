@@ -1,0 +1,14 @@
+<p>A private key committed to a repository must be considered compromised, even if it is deleted later: it remains in the history.</p>
+<h2>Why is this an issue?</h2>
+<p>Credentials must never appear in clear text in source code: use a credentials store (such as Vault or credstash) and refer to secrets by identifier.</p>
+<h2>Noncompliant code example</h2>
+<pre>-----BEGIN RSA PRIVATE KEY-----</pre>
+<h2>Compliant solution</h2>
+<pre>Store the key in a vault or a key store and reference it by identifier.</pre>
+<h2>Notes</h2>
+<p>Inactive by default: sonar-text already covers private keys in SonarQube.</p>
+<h2>See</h2>
+<ul>
+  <li><a href="https://cwe.mitre.org/data/definitions/321.html">CWE-321</a></li>
+  <li><a href="https://cwe.mitre.org/data/definitions/798.html">CWE-798</a></li>
+</ul>

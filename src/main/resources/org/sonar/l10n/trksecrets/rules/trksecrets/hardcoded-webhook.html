@@ -1,0 +1,11 @@
+<p>Slack, Hubspot and Twilio webhook URLs contain a secret path: anyone who knows it can post messages.</p>
+<h2>Why is this an issue?</h2>
+<p>Credentials must never appear in clear text in source code: use a credentials store (such as Vault or credstash) and refer to secrets by identifier.</p>
+<h2>Noncompliant code example</h2>
+<pre>https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX</pre>
+<h2>Compliant solution</h2>
+<pre>Read the URL from a secret store.</pre>
+<h2>See</h2>
+<ul>
+  <li><a href="https://cwe.mitre.org/data/definitions/798.html">CWE-798</a></li>
+</ul>

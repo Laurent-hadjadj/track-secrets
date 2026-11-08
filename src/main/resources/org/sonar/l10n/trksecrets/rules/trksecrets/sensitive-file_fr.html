@@ -1,0 +1,13 @@
+<p>Les magasins de clés, certificats, fichiers <code>.env</code>, <code>.netrc</code>, historiques de shell ou fichiers de mots de passe ne doivent pas être versionnés.</p>
+<h2>Pourquoi est-ce un problème ?</h2>
+<p>Un identifiant ne doit jamais apparaître en clair dans le code source : utilisez un coffre de secrets (comme Vault ou credstash) et référencez les secrets par leur identifiant.</p>
+<h2>Exemple de code non conforme</h2>
+<pre>config/prod.env</pre>
+<h2>Solution conforme</h2>
+<pre>Ajoutez le fichier au .gitignore et fournissez un modèle.</pre>
+<h2>Remarques</h2>
+<p>Inactive par défaut. Basée uniquement sur le nom du fichier.</p>
+<h2>Voir</h2>
+<ul>
+  <li><a href="https://cwe.mitre.org/data/definitions/538.html">CWE-538</a></li>
+</ul>

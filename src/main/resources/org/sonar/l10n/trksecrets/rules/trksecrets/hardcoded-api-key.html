@@ -1,0 +1,13 @@
+<p>API keys and access tokens give access to a service on behalf of their owner. Once committed, they must be considered compromised.</p>
+<h2>Why is this an issue?</h2>
+<p>Credentials must never appear in clear text in source code: use a credentials store (such as Vault or credstash) and refer to secrets by identifier.</p>
+<h2>Noncompliant code example</h2>
+<pre>api_key: "k8Jd92LmQp0xZvB3nTa7"</pre>
+<h2>Compliant solution</h2>
+<pre>api_key: ${API_KEY}</pre>
+<h2>Notes</h2>
+<p>Detected from key names ending in <em>key</em> or <em>token</em>, with a value of at least 16 characters without spaces that does not resemble the key name.</p>
+<h2>See</h2>
+<ul>
+  <li><a href="https://cwe.mitre.org/data/definitions/798.html">CWE-798</a></li>
+</ul>

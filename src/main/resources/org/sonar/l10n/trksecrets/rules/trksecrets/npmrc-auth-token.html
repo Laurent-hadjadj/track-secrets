@@ -1,0 +1,11 @@
+<p>An <code>_authToken</code> in <code>.npmrc</code> allows publishing and reading private packages.</p>
+<h2>Why is this an issue?</h2>
+<p>Credentials must never appear in clear text in source code: use a credentials store (such as Vault or credstash) and refer to secrets by identifier.</p>
+<h2>Noncompliant code example</h2>
+<pre>//registry.npmjs.org/:_authToken=npm_0123456789abcdef</pre>
+<h2>Compliant solution</h2>
+<pre>//registry.npmjs.org/:_authToken=${NPM_TOKEN}</pre>
+<h2>See</h2>
+<ul>
+  <li><a href="https://cwe.mitre.org/data/definitions/798.html">CWE-798</a></li>
+</ul>

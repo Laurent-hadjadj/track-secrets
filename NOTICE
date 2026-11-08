@@ -1,0 +1,39 @@
+Track Secrets
+Copyright 2026 Laurent HADJADJ
+
+Ce produit est distribué sous licence GNU Lesser General Public License, version 3 ou ultérieure
+(LGPL-3.0-or-later), voir le fichier LICENSE. La LGPL 3.0 complète la GPL 3.0, dont le texte figure dans
+LICENSES/GPL-3.0.txt.
+La documentation (README.md, dossier docs/) est distribuée sous licence CC BY-SA 4.0
+(voir docs/LICENSE.md et LICENSES/CC-BY-SA-4.0.txt).
+
+Une explication du choix de licence et de sa portée se trouve dans LICENSING.md.
+
+Éléments dérivés (licence Apache 2.0, texte dans LICENSES/Apache-2.0.txt)
+--------------------------------------------------------------------------
+1. Whispers (https://github.com/Skyscanner/whispers)
+   Copyright Skyscanner Ltd.
+   Éléments repris, portés de Python vers Java et modifiés : le modèle de règles déclaratives, les
+   expressions régulières des règles, le filtre des valeurs non statiques, le principe des extracteurs de
+   couples clé/valeur par type de fichier.
+
+2. Sonar Secrets (https://github.com/Skyscanner/sonar-secrets)
+   Copyright 2018 Skyscanner Limited.
+   Éléments repris et modifiés : la règle de chaîne à forte entropie (entropie de Shannon) et les motifs de noms
+   de variables pour les mots de passe et les clés d'API.
+
+Les fichiers concernés portent l'en-tête « SPDX-License-Identifier: LGPL-3.0-or-later AND Apache-2.0 » et la
+mention de leur origine. Pour le contenu d'origine de ces parties, la licence Apache 2.0 de leurs auteurs
+continue de s'appliquer ; l'œuvre combinée est distribuée sous LGPL 3.0 ou ultérieure, la licence Apache 2.0
+étant compatible avec la version 3 de la GPL et de la LGPL.
+
+Modifications apportées : portage en Java, réécriture sous forme de capteur SonarQube multi-langage, ajout
+d'extracteurs (YAML, JSON, XML, properties, shell, Dockerfile, langages de programmation), de règles (jetons de
+services, entropie configurable, règles personnalisées) et de filtres anti-faux-positifs.
+
+Autres éléments tiers
+---------------------
+- sonar-analyzer-commons (SonarSource), embarqué dans le jar : licence GNU LGPL 3.0.
+  Code source : https://github.com/SonarSource/sonar-analyzer-commons
+- Ces textes sont embarqués dans le jar du plugin, dans META-INF/ (LICENSE, NOTICE, LICENSING.md, LICENSES/).
+- SonarQube est une marque de SonarSource SA, Suisse.

@@ -1,0 +1,13 @@
+<p>A value of 13 to 19 digits that passes the Luhn check may be a payment card number.</p>
+<h2>Why is this an issue?</h2>
+<p>Credentials must never appear in clear text in source code: use a credentials store (such as Vault or credstash) and refer to secrets by identifier.</p>
+<h2>Noncompliant code example</h2>
+<pre>card = "4111111111111111"</pre>
+<h2>Compliant solution</h2>
+<pre>Use a tokenization service.</pre>
+<h2>Notes</h2>
+<p>Inactive by default: any long number can pass the Luhn check.</p>
+<h2>See</h2>
+<ul>
+  <li><a href="https://cwe.mitre.org/data/definitions/311.html">CWE-311</a></li>
+</ul>

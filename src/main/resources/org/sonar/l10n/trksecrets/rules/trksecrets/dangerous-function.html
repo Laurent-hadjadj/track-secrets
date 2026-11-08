@@ -1,0 +1,11 @@
+<p><code>eval</code>, <code>exec</code>, <code>system</code> and similar calls can lead to remote code execution when they receive untrusted data.</p>
+<h2>Noncompliant code example</h2>
+<pre>os.system(command)</pre>
+<h2>Compliant solution</h2>
+<pre>Use a safe API with an explicit argument list.</pre>
+<h2>Notes</h2>
+<p>Inactive by default. Python only.</p>
+<h2>See</h2>
+<ul>
+  <li><a href="https://cwe.mitre.org/data/definitions/95.html">CWE-95</a></li>
+</ul>

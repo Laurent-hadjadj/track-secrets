@@ -1,0 +1,13 @@
+<p>Une valeur de 13 à 19 chiffres qui passe le contrôle de Luhn peut être un numéro de carte bancaire.</p>
+<h2>Pourquoi est-ce un problème ?</h2>
+<p>Un identifiant ne doit jamais apparaître en clair dans le code source : utilisez un coffre de secrets (comme Vault ou credstash) et référencez les secrets par leur identifiant.</p>
+<h2>Exemple de code non conforme</h2>
+<pre>card = "4111111111111111"</pre>
+<h2>Solution conforme</h2>
+<pre>Utilisez un service de tokenisation.</pre>
+<h2>Remarques</h2>
+<p>Inactive par défaut : n'importe quel long nombre peut passer le contrôle de Luhn.</p>
+<h2>Voir</h2>
+<ul>
+  <li><a href="https://cwe.mitre.org/data/definitions/311.html">CWE-311</a></li>
+</ul>

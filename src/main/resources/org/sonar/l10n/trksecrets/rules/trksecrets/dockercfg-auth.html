@@ -1,0 +1,11 @@
+<p>The <code>auth</code> field of a <code>.dockercfg</code> or <code>config.json</code> file is the base64 encoding of <em>user:password</em>.</p>
+<h2>Why is this an issue?</h2>
+<p>Credentials must never appear in clear text in source code: use a credentials store (such as Vault or credstash) and refer to secrets by identifier.</p>
+<h2>Noncompliant code example</h2>
+<pre>{"auths": {"registry.example": {"auth": "dXNlcjpwYXNz"}}}</pre>
+<h2>Compliant solution</h2>
+<pre>Use a credential helper or a CI secret.</pre>
+<h2>See</h2>
+<ul>
+  <li><a href="https://cwe.mitre.org/data/definitions/798.html">CWE-798</a></li>
+</ul>

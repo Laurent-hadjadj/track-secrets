@@ -1,0 +1,11 @@
+<p>Autoriser toutes les origines, tous les en-têtes ou les identifiants permet à n'importe quel site web d'appeler l'API au nom d'un utilisateur.</p>
+<h2>Exemple de code non conforme</h2>
+<pre>ResourceOptions(allow_credentials=True, allow_headers="*")</pre>
+<h2>Solution conforme</h2>
+<pre>Listez explicitement les origines et les en-têtes.</pre>
+<h2>Remarques</h2>
+<p>Inactive par défaut. Python uniquement.</p>
+<h2>Voir</h2>
+<ul>
+  <li><a href="https://cwe.mitre.org/data/definitions/942.html">CWE-942</a></li>
+</ul>

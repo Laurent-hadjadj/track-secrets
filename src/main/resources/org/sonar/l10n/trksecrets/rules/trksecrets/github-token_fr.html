@@ -1,0 +1,13 @@
+<p>Les jetons d'accès personnels, OAuth, d'installation et à permissions fines de GitHub donnent accès aux dépôts. Révoquez tout jeton trouvé dans le code.</p>
+<h2>Pourquoi est-ce un problème ?</h2>
+<p>Un identifiant ne doit jamais apparaître en clair dans le code source : utilisez un coffre de secrets (comme Vault ou credstash) et référencez les secrets par leur identifiant.</p>
+<h2>Exemple de code non conforme</h2>
+<pre>token = "ghp_0123456789abcdefghijklmnopqrstuvwxyz"</pre>
+<h2>Solution conforme</h2>
+<pre>token = ${GITHUB_TOKEN}</pre>
+<h2>Remarques</h2>
+<p>Inactive par défaut : sonar-text couvre déjà les jetons GitHub dans SonarQube.</p>
+<h2>Voir</h2>
+<ul>
+  <li><a href="https://cwe.mitre.org/data/definitions/798.html">CWE-798</a></li>
+</ul>
